@@ -1,5 +1,4 @@
 <?php
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -9,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Add/removes/edits settings in the Theme Options; specific to Responsive parent theme
  ** 
- ** 
+ ** TODO: Move away from responsive
  *
  * @version     1.0
  * @package     Child theme
