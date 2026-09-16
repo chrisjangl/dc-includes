@@ -21,7 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	// add_action( 'wp_head', 'dc_print_template', 99 );
 	
 	// adds widgets to the WP Dashboard
-	// add_action( 'wp_dashboard_setup', 'dc_add_dashboard_widgets' );
+    if ( apply_filters( 'dc_enable_dashboard_widgets', false ) ) {
+        add_action( 'wp_dashboard_setup', 'dc_add_dashboard_widgets' );
+    }
 
  /**** end Actions, hooks, filters ****/
 
@@ -124,6 +126,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	/**
 	 * Create the function to output the contents of our Dashboard Widget.
+     * 
+     * TODO: Add: 
+     * - WordPress Version
+     * - MySQL version
 	 */
 	function dc_site_location_dashboard_widget() {
 
