@@ -1,5 +1,4 @@
 <?php
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -15,28 +14,27 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author   Digitally Cultured
  */
 
-/**** Actions to toggle ****/
-    add_action( 'wp_head', 'dc_inject_ga', 99 );
-/**** end Actions to toggle ****/
+/**
+ * Inject Google Analytics
+ *
+ * @return void
+ */
+function dc_inject_ga() {
 
-/**** Function Definitions ****/
-    function dc_inject_ga() {
+    // enter the Google Analytics ID for your property here
+    $ga_id = apply_filters( 'dc_ga_id', '' );
 
-        // enter the Google Analytics ID for your property here
-        $ga_id = '';
+    $html = '
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=' . $ga_id . '"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag(\'js\', new Date());
+        gtag(\'config\', \'' . $ga_id . '\');
+    </script>
+    ';
 
-        $html = '
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=' . $ga_id . '"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag(\'js\', new Date());
-            gtag(\'config\', \'' . $ga_id . '\');
-        </script>
-        ';
-
-        echo $html;
-    }
-    
-/**** end Function Definitions ****/
+    echo $html;
+}
+add_action( 'wp_head', 'dc_inject_ga', 99 );
