@@ -127,24 +127,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 	/**
 	 * Create the function to output the contents of our Dashboard Widget.
      * 
-     * TODO: Add: 
-     * - WordPress Version
+     * Shows:
+     * - WP version
+     * - PHP version
      * - MySQL version
+     * - Server IP address
 	 */
 	function dc_site_location_dashboard_widget() {
 
+        $widget_style = '
+        <style>
+            #dc_site_location .inside {
+                display: flex;
+            }
+        </style>
+        ';
+
+        echo $widget_style;
+
+        $open_div = '<div style="padding: 10px; margin-bottom: 10px;">';
+        $close_div = '</div>';
 		$open_heading = "<h3 style=\"font-weight: bolder; text-decoration: underline;\">";
 		$close_heading = "</h3>";
 
+        $WordPress_version = function_exists('get_bloginfo') ? get_bloginfo( 'version' ) : '<i>WordPress version not available</i>';
 		$server_IP = $_SERVER['SERVER_ADDR'];
-
-		// server IP
-		echo $open_heading . "Server IP address" . "$close_heading";
-		echo "<p>$server_IP</p>";
+        $mySQL_version = isset( $GLOBALS['wpdb'] ) ? $GLOBALS['wpdb']->get_var( "SELECT VERSION()" ) : '<i>MySQL version not available</i>';
 		
+		// WordPress version
+        echo $open_div;
+		echo $open_heading . "WordPress version" . "$close_heading";
+		echo "<p>" . $WordPress_version . "</p>";
+        echo $close_div;
+
 		// PHP version
+        echo $open_div;
 		echo $open_heading . "PHP version" . "$close_heading";
 		echo "<p>" . phpversion() . "</p>";
+        echo $close_div;
+        
+        // MySQL version
+        echo $open_div;
+        echo $open_heading . "MySQL version" . "$close_heading";
+        echo "<p>$mySQL_version</p>";
+        echo $close_div;
+
+        // server IP
+        echo $open_div;
+        echo $open_heading . "Server IP address" . "$close_heading";
+        echo "<p>$server_IP</p>";
+        echo $close_div;
 
 	}
 
