@@ -87,28 +87,3 @@ function dc_get_nap_address() {
 
 	return $return;
 }
-
-/**
- * Gets the footer credits for the site
- * 
- * If an associate is passed, it will add that associate to the credits
- *
- * @param string $associate (optional) The associate to add to the credits. Options: socialco, adrian
- *
- * @return string HTML The footer credits
- */
-function dc_get_footer_credits( $associate='' ) {
-    $return = "This site is powered by <a href=\"https://digitallycultured.com/\">Digitally Cultured</a>";
-    switch ( $associate ) {
-        case 'socialco':
-            $return .= " and was produced by <a href=\"http://socialcoadvertising.com/\">Socialco</a>.";
-            break;
-        case 'adrian':
-            $return .= ' and is <a href="http://www.adriannaccari.com/">by Adrian</a>.';
-            break;
-        default: 
-            $return .= '.';
-    }
-
-    return $return;
-}

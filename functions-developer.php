@@ -68,6 +68,13 @@ if ( ! defined( 'ABSPATH' ) ) {
         
     }
 
+    /**
+     * Cachebuster for CSS/JS files
+     * 
+     * @param string $file - path to file to use for cachebusting (optional)
+     *
+     * @return string - cachebusting string
+     */
     function dc_cache_buster( $file='' ) {
 
         if ( $file ) {
@@ -75,7 +82,6 @@ if ( ! defined( 'ABSPATH' ) ) {
         } else {
             return date("i.s", filemtime( get_stylesheet_directory() . '/style.css' ) );
         }
-
     }
 
     /**
